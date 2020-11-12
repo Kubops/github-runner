@@ -16,8 +16,6 @@ spec:
       labels:
         app: github-runner
     spec:
-      ##imagePullSecrets:
-      ##- name: your-own-registry
       volumes:
         - name: dind-storage
           emptyDir: {}
@@ -51,11 +49,11 @@ spec:
             secretKeyRef:
               name: github-runner
               key: GITHUB_OWNER
-        #- name: GITHUB_REPOSITORY
-        #  valueFrom:
-        #    secretKeyRef:
-        #      name: github-runner
-        #      key: GITHUB_REPOSITORY
+        - name: GITHUB_REPOSITORY
+          valueFrom:
+            secretKeyRef:
+              name: github-runner
+              key: GITHUB_REPOSITORY
       - name: dind
         image: docker:19.03.13-dind
         command: ["dockerd"]
